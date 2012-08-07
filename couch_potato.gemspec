@@ -16,11 +16,19 @@ Gem::Specification.new do |s|
   s.add_dependency 'couchrest', '>=1.0.1'
   s.add_dependency 'activemodel'
 
+
+  if RUBY_PLATFORM == "java"
+    s.add_dependency 'jruby-openssl'
+    s.add_development_dependency 'therubyrhino'
+  else
+    s.add_development_dependency 'therubyracer'
+  end
+
+
   s.add_development_dependency 'rspec', '>=2.0'
   s.add_development_dependency 'timecop'
   s.add_development_dependency 'tzinfo'
   s.add_development_dependency 'rake'
-  s.add_development_dependency 'therubyracer'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

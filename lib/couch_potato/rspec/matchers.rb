@@ -1,13 +1,20 @@
-require 'v8'
-
 module CouchPotato
   module RSpec
     module RunJS
+
       private
 
       def run_js(js)
-        cxt = V8::Context.new
-        cxt.eval(js)
+
+        if RUBY_PLATFORM == "java"
+          require "rhino"
+          context = Rhino::Context.new
+        else
+          require "v8"
+          context = V8::Context.new
+        end
+        context.eval(js)
+
       end
     end
   end
